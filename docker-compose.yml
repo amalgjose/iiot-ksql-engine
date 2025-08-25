@@ -32,6 +32,8 @@ services:
       - kafka
     ports:
       - "8088:8088"
+    volumes:
+      - ./ksql/init.sql:/etc/ksql/init.sql
     environment:
       KSQL_CONFIG_DIR: "/etc/ksql"
       KSQL_BOOTSTRAP_SERVERS: kafka:9092
@@ -42,6 +44,9 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
+      KSQL_KSQL_QUERIES_FILE: "/etc/ksql/init.sql"
+      KSQL_KSQL_STREAMS_AUTO_CREATE: "true"
+      KSQL_KSQL_TABLES_AUTO_CREATE: "true"
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.6.0
