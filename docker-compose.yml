@@ -62,3 +62,11 @@ services:
       - ksqldb-server
     entrypoint: /bin/sh
     tty: true
+    
+ tag-data-gen:
+    build: ./producer
+    container_name: tag-data-generator
+    depends_on:
+      - kafka
+    environment:
+      - PYTHONUNBUFFERED=1
